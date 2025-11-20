@@ -6,8 +6,14 @@ export function getTimeIcon() {
 
 export function renderRecipesHTML(recipes = []) {
   return recipes
-    .map(
-      (recipe) => `
+    .map((recipe) => {
+      const rawDiff = recipe.difficulty || ''
+      const diffEscaped = escapeHtml(rawDiff)
+      const diffLabel =
+        diffEscaped && diffEscaped.length
+          ? diffEscaped.charAt(0).toUpperCase() + diffEscaped.slice(1)
+          : ''
+      return `
     <div class="recipe-card" data-id="${escapeHtmlAttr(recipe.id)}">
       <div class="recipe-image" style="background-image: url('${escapeHtmlAttr(
         recipe.imageUrl || 'https://via.placeholder.com/300x200?text=No+Image'
@@ -32,12 +38,12 @@ export function renderRecipesHTML(recipes = []) {
             <button class="btn-secondary edit-recipe">Edit</button>
           </div>
           <span class="card-difficulty-pill difficulty-${escapeHtmlAttr(
-            recipe.difficulty || ''
-          )}">${escapeHtml(recipe.difficulty || '')}</span>
+            rawDiff
+          )}">${diffLabel}</span>
         </div>
       </div>
     </div>`
-    )
+    })
     .join('')
 }
 
