@@ -139,7 +139,73 @@ class RecipeManager {
                 cookTime: 10,
                 difficulty: "medium",
                 imageUrl: "https://t3.ftcdn.net/jpg/15/40/04/04/360_F_1540040464_3Sxvd4pEjISJ8wjszhE7rduXRhKYBqpv.jpg"
-            }
+            },
+            {
+    id: this.generateId(),
+    title: "Classic Baked Cheesecake",
+    description: "Rich, creamy, smooth baked cheesecake with a buttery biscuit crust.",
+    ingredients: [
+        // Crust
+        "1 1/2 cups (150g) crushed digestive biscuits or graham crackers",
+        "1/4 cup (60g) melted butter",
+        "2 tbsp sugar (optional)",
+
+        // Filling
+        "400g cream cheese (room temperature)",
+        "1/2 cup (100g) granulated sugar",
+        "1/2 cup (120g) fresh cream or sour cream",
+        "2 large eggs (room temperature)",
+        "1 tsp vanilla extract",
+        "1 tbsp lemon juice",
+        "1 tbsp cornflour (optional)"
+    ],
+    steps: [
+        "Preheat oven to 160°C (320°F). Line and prepare an 8-inch springform pan.",
+        "Mix crushed biscuits, melted butter, and sugar. Press mixture into the pan to form crust. Bake for 8 minutes and cool.",
+        "Beat cream cheese until smooth. Add sugar and mix until creamy.",
+        "Add fresh cream, vanilla, lemon juice, and cornflour. Mix gently.",
+        "Add eggs one at a time, mixing slowly. Do not over-mix.",
+        "Pour filling onto the cooled crust and smooth the top.",
+        "Bake for 45–55 minutes or until edges are set and center is slightly wobbly.",
+        "Turn off oven and let the cheesecake sit inside for 15 minutes.",
+        "Cool completely at room temperature, then refrigerate for at least 4 hours."
+    ],
+    prepTime: 20,
+    cookTime: 50,
+    difficulty: "hard",
+    imageUrl: "https://img.freepik.com/premium-photo/cheesecake-cherry-hd-8k-wallpaper-stock-photographic-image_890746-37390.jpg"
+    },
+    {
+    id: this.generateId(),
+    title: "Chilli Cheese Toast",
+    description: "Crispy toast topped with spicy chilli-cheese mixture",
+    ingredients: [
+        "4 bread slices",
+        "1 cup grated cheese (mozzarella or processed)",
+        "2 green chillies, finely chopped",
+        "1/4 cup capsicum, finely chopped",
+        "1/4 cup onions, finely chopped (optional)",
+        "1 tbsp butter",
+        "1/2 tsp chilli flakes",
+        "1/2 tsp oregano",
+        "Salt to taste"
+    ],
+    steps: [
+        "Preheat the oven or toaster to 180°C (350°F).",
+        "In a bowl, mix grated cheese, green chillies, capsicum, onions, chilli flakes, oregano, and a pinch of salt.",
+        "Spread a thin layer of butter on each bread slice.",
+        "Generously spread the chilli-cheese mixture on top of each slice.",
+        "Place the slices on a baking tray.",
+        "Bake or toast for 5-7 minutes, or until cheese melts and edges turn golden.",
+        "Remove and cut into halves. Serve hot."
+    ],
+    prepTime: 10,
+    cookTime: 7,
+    difficulty: "easy",
+    imageUrl: "https://www.chefkunalkapur.com/wp-content/uploads/2021/03/Chilli-Cheese-Toast-scaled.jpg?v=1620106898"
+}
+
+
         ];
 
         this.recipes = sampleRecipes;
