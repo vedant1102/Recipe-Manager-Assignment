@@ -1,192 +1,101 @@
-Recipe Manager Web App
+# Recipe Manager Web App
 
-A responsive, client-side Recipe Manager that allows users to create, view, edit, and delete recipes — with full data persistence using browser localStorage.
-No backend. No setup. Just open and use.
+A simple, fully client-side Recipe Manager built using **HTML**, **CSS**, and **JavaScript**, with **localStorage** for data persistence.
 
-📌 Features
+This project is based on the assessment requirements described in the provided specification.  
+It supports creating, viewing, editing, searching, and deleting recipes directly in the browser.
 
-✨ Add, edit, and delete recipes
+---
 
-💾 Automatic data saving using localStorage
+## 🚀 Features
 
-🧪 Preloaded sample recipes on first run
+### 📌 Views / Pages
+- **Home (Recipe List):**  
+  - Grid layout displaying recipe cards  
+  - Search bar (search by title)  
+  - Difficulty filter (All/Easy/Medium/Hard)
 
-🎯 Search & filter recipes
+- **Recipe Detail Page:**  
+  - Shows full recipe information  
+  - Edit and Delete options
 
-📱 Fully responsive UI
+- **Add/Edit Recipe Form:**  
+  - Inputs: Title, Description, Ingredients, Steps, Prep Time, Cook Time, Difficulty, Optional Image URL  
+  - Client-side form validation
 
-⚡ Instant, client-side performance
+---
 
-🛠 Built with HTML • CSS • JavaScript (ES6)
+## 🗄️ Data & Local Storage
 
-📂 How to Run the App
-Prerequisites
+- On first load, the app inserts **the candidate’s recipe** into `localStorage`.
+- Optional: Additional 3–5 sample recipes may be inserted.
+- All recipes are stored under the key:
 
-A modern web browser (Chrome, Firefox, Safari, Edge)
 
-No server required
+## 🛠️ CRUD Operations
 
-Steps
+### ✔️ Create  
+User submits the Add Recipe form → New recipe is saved to `localStorage`.
 
-Download:
+### 📖 Read  
+Recipes are loaded from `localStorage` on app startup.
 
-index.html
+### ✏️ Update  
+Editing a recipe overwrites the existing object in `localStorage`.
 
-styles.css
+### 🗑️ Delete  
+Recipe can be removed and the UI refreshes.
 
-script.js
+---
 
-Open index.html in your browser
-✔️ Works instantly via file:// protocol
-✔️ No installation needed
+## 🔍 Search & Filters
 
-First Run Experience
+- Search by **recipe title**
+- Filter by **difficulty level**:  
+  `All | Easy | Medium | Hard`
 
-Loads with sample recipes
 
-Includes Vedant’s Pizza (My Own Recipe)
+---
 
-Includes 4 additional recipes
+## 📱 Responsiveness
 
-Data auto-saves to localStorage
+- Fully responsive layout  
+- Works on **desktop**, **tablet**, and **mobile**  
 
-🧩 Data Structure (localStorage)
-Storage Key
-"recipes"
 
-Recipe Schema
-{
-  id: "string",
-  title: "string",
-  description: "string",
-  ingredients: ["array", "of", "strings"],
-  steps: ["array", "of", "strings"],
-  prepTime: number,
-  cookTime: number,
-  difficulty: "easy" | "medium" | "hard",
-  imageUrl: "string"
-}
+---
 
-Example
-[
-  {
-    "id": "kf93j2f83j",
-    "title": "Vedant's Pizza",
-    "description": "A delicious homemade pizza recipe for two people",
-    "ingredients": ["2 pizza base", "2 tomatoes", "2 capsicum", "1 onion"],
-    "steps": ["Finely cut all the veggies...", "Add veggies to pan..."],
-    "prepTime": 15,
-    "cookTime": 10,
-    "difficulty": "medium",
-    "imageUrl": ""
-  }
-]
+## ⚠️ Error Handling & Validation
 
-⚙️ Assumptions & Limitations
-Technical Assumptions
+- Prevents invalid form submissions  
+- Shows clear error messages  
+- Handles corrupted or missing `localStorage` data gracefully  
+- Fallback default dataset if needed
 
-Browser supports ES6+, localStorage, CSS Grid/Flexbox
+---
 
-Single-user usage in one browser
+## ▶️ How to Run the App
 
-Data persists unless user clears browser storage
+1. **Download or clone** the source code.  
+2. Open `index.html` in any modern browser (Chrome, Firefox, Edge).  
+3. No server is required—everything runs fully on the client.
 
-Functional Limitations
+---
 
-Image upload not supported (URL only)
+## 📝 Assumptions & Limitations
 
-No external backup/export
+- All data persists only in **localStorage** → clearing browser storage deletes all recipes.
+- No backend or authentication is implemented.
+- Images are referenced via URLs (no file upload).
+- Designed for browsers that support modern JavaScript (ES6+).
 
-No syncing across devices
+---
 
-No authentication or accounts
+## 🐞 Known Issues
 
-Search does not include steps field
+- Very large datasets may impact performance due to client-only storage.
+- Image URLs are not validated beyond basic checks.
+- If `localStorage` is blocked or disabled, the app cannot function.
 
-No categories/tags for recipes
+---
 
-🚀 Performance Notes
-# Recipes	Performance
-50–100	🟢 Optimal
-Up to 500	🟡 Acceptable
-1000+	🔴 Not recommended (UI may lag)
-🐛 Known Issues
-Functional
-
-Broken image URLs not validated
-
-Fast clicking “Add Ingredient/Step” may create duplicates
-
-No text length limits
-
-Search is case-sensitive
-
-No “Clear Filters” button
-
-No automatic backup
-
-Corrupted localStorage resets app to sample data
-
-Browser-Specific
-
-Safari Private Mode: localStorage may not persist
-
-Mobile Browsers:
-
-Small touch targets
-
-Keyboard may cover fields
-
-UI/UX
-
-No loading indicators
-
-No undo after delete
-
-No confirmation on canceling edits
-
-🛠 Troubleshooting
-“My recipes disappeared!”
-
-Browser data was cleared → app resets to sample data.
-
-“Form won’t submit”
-
-Check required fields (highlighted in red)
-
-Ensure numbers are valid
-
-“Images not loading”
-
-Use direct image links (.jpg, .png)
-
-Make sure images are publicly accessible
-
-“App looks broken”
-
-Ensure all 3 files are in the SAME folder
-
-Open Developer Console (F12 → Console) for errors
-
-🌐 Browser Compatibility
-Browser	Version	Support
-Chrome	60+	✅ Full
-Firefox	55+	✅ Full
-Safari	11+	✅ Full
-Edge	79+	✅ Full
-Mobile	Recent	✅ Full
-🆘 Getting Help
-
-If you run into issues:
-
-Re-check this README
-
-Ensure all files are correctly placed
-
-Restart the browser
-
-Try another browser
-
-Check Developer Console
-
-Note: All data stays in your browser. Clearing browsing data will erase all recipes.
