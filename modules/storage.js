@@ -20,7 +20,6 @@ export function saveRecipes(recipes) {
 }
 
 export function initializeSampleRecipes() {
-  // same sample data as before
   const pizzaRecipe = {
     id: generateId(),
     title: "Vedant's Pizza",
@@ -56,6 +55,8 @@ export function initializeSampleRecipes() {
     difficulty: 'medium',
     imageUrl:
       'https://wallpaperbat.com/img/97392-food-pizza-cheese-hd-wallpaper-desktop-and-mobile-image-photo.jpg',
+    isVeg: true,
+    wishlisted: true,
   }
 
   const sampleRecipes = [
@@ -88,6 +89,8 @@ export function initializeSampleRecipes() {
       cookTime: 20,
       difficulty: 'easy',
       imageUrl: 'https://wallpapercave.com/wp/wp14904002.jpg',
+      isVeg: true,
+      wishlisted: false,
     },
     {
       id: generateId(),
@@ -120,6 +123,8 @@ export function initializeSampleRecipes() {
       difficulty: 'medium',
       imageUrl:
         'https://t3.ftcdn.net/jpg/15/40/04/04/360_F_1540040464_3Sxvd4pEjISJ8wjszhE7rduXRhKYBqpv.jpg',
+      isVeg: false,
+      wishlisted: false,
     },
     {
       id: generateId(),
@@ -154,6 +159,8 @@ export function initializeSampleRecipes() {
       difficulty: 'hard',
       imageUrl:
         'https://img.freepik.com/premium-photo/cheesecake-cherry-hd-8k-wallpaper-stock-photographic-image_890746-37390.jpg',
+      isVeg: false,
+      wishlisted: false,
     },
     {
       id: generateId(),
@@ -184,6 +191,8 @@ export function initializeSampleRecipes() {
       difficulty: 'easy',
       imageUrl:
         'https://www.chefkunalkapur.com/wp-content/uploads/2021/03/Chilli-Cheese-Toast-scaled.jpg?v=1620106898',
+      isVeg: true,
+      wishlisted: false,
     },
   ]
 

@@ -13,13 +13,24 @@ export function renderRecipesHTML(recipes = []) {
         diffEscaped && diffEscaped.length
           ? diffEscaped.charAt(0).toUpperCase() + diffEscaped.slice(1)
           : ''
+      const vegBadge = recipe.isVeg
+        ? `<span class="veg-badge">Veg</span>`
+        : `<span class="nonveg-badge">Non‑Veg</span>`
+      // add 'active' class when wishlisted so CSS can style it
+      const heartClass = recipe.wishlisted
+        ? 'wishlist-btn active'
+        : 'wishlist-btn'
+      const heart = recipe.wishlisted ? '♥' : '♡'
       return `
     <div class="recipe-card" data-id="${escapeHtmlAttr(recipe.id)}">
       <div class="recipe-image" style="background-image: url('${escapeHtmlAttr(
         recipe.imageUrl || 'https://via.placeholder.com/300x200?text=No+Image'
       )}')"></div>
       <div class="recipe-content">
-        <h3 class="recipe-title">${escapeHtml(recipe.title)}</h3>
+        <div class="card-top-row">
+          <h3 class="recipe-title">${escapeHtml(recipe.title)}</h3>
+          <div class="badge-wrap">${vegBadge}</div>
+        </div>
         <p class="recipe-description">${escapeHtml(recipe.description)}</p>
         <div class="recipe-meta">
           <span class="meta-item">${getTimeIcon()} Prep: ${
@@ -36,6 +47,7 @@ export function renderRecipesHTML(recipes = []) {
           <div class="action-buttons">
             <button class="btn-primary view-recipe">View</button>
             <button class="btn-secondary edit-recipe">Edit</button>
+            <button class="btn-wishlist ${heartClass}" title="Toggle wishlist">${heart}</button>
           </div>
           <span class="card-difficulty-pill difficulty-${escapeHtmlAttr(
             rawDiff
@@ -60,53 +72,30 @@ export function renderRecipeDetailHTML(recipe) {
           recipe.description
         )}</p>
         <div class="recipe-detail-meta">
-          <div class="meta-item">
-            <span class="meta-label">${getTimeIcon()} Prep Time</span>
-            <span class="meta-value">${
-              Number(recipe.prepTime) || 0
-            } minutes</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">${getTimeIcon()} Cook Time</span>
-            <span class="meta-value">${
-              Number(recipe.cookTime) || 0
-            } minutes</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">${getTimeIcon()} Total Time</span>
-            <span class="meta-value">${
-              (Number(recipe.prepTime) || 0) + (Number(recipe.cookTime) || 0)
-            } minutes</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Difficulty</span>
-            <span class="meta-value recipe-difficulty difficulty-${escapeHtmlAttr(
-              recipe.difficulty || ''
-            )}">${escapeHtml(recipe.difficulty || '')}</span>
-          </div>
+          <div class="meta-item"><span class="meta-label">${getTimeIcon()} Prep Time</span><span class="meta-value">${
+    Number(recipe.prepTime) || 0
+  } minutes</span></div>
+          <div class="meta-item"><span class="meta-label">${getTimeIcon()} Cook Time</span><span class="meta-value">${
+    Number(recipe.cookTime) || 0
+  } minutes</span></div>
+          <div class="meta-item"><span class="meta-label">${getTimeIcon()} Total Time</span><span class="meta-value">${
+    (Number(recipe.prepTime) || 0) + (Number(recipe.cookTime) || 0)
+  } minutes</span></div>
+          <div class="meta-item"><span class="meta-label">Difficulty</span><span class="meta-value recipe-difficulty difficulty-${escapeHtmlAttr(
+            recipe.difficulty || ''
+          )}">${escapeHtml(recipe.difficulty || '')}</span></div>
         </div>
       </div>
     </div>
-    <div class="ingredients-list">
-      <h3>Ingredients</h3>
-      <ul>
-        ${
-          Array.isArray(recipe.ingredients)
-            ? recipe.ingredients
-                .map((i) => `<li>${escapeHtml(i)}</li>`)
-                .join('')
-            : ''
-        }
-      </ul>
-    </div>
-    <div class="steps-list">
-      <h3>Instructions</h3>
-      <ol>
-        ${
-          Array.isArray(recipe.steps)
-            ? recipe.steps.map((s) => `<li>${escapeHtml(s)}</li>`).join('')
-            : ''
-        }
-      </ol>
-    </div>`
+    <div class="ingredients-list"><h3>Ingredients</h3><ul>${
+      Array.isArray(recipe.ingredients)
+        ? recipe.ingredients.map((i) => `<li>${escapeHtml(i)}</li>`).join('')
+        : ''
+    }</ul></div>
+    <div class="steps-list"><h3>Instructions</h3><ol>${
+      Array.isArray(recipe.steps)
+        ? recipe.steps.map((s) => `<li>${escapeHtml(s)}</li>`).join('')
+        : ''
+    }</ol></div>
+  `
 }

@@ -21,6 +21,9 @@
                   >Add Recipe</a
                 >
               </li>
+              <li>
+                <a href="#" class="nav-link" data-page="wishlist">Wishlist</a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -31,34 +34,53 @@
       <!-- Home Page -->
       <section id="home" class="page active">
         <div class="page-header">
-          <h1 class="page-title">My Recipes</h1>
-          <div class="search-filter-container">
-            <div class="search-box">
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Search recipes..."
-              />
-              <button id="search-btn">🔍</button>
-            </div>
-            <div class="filter-container">
-              <select id="difficulty-filter">
-                <option value="all">All Difficulties</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-              </select>
-              <select id="time-filter">
-                <option value="0">Any Prep Time</option>
-                <option value="15">Up to 15 min</option>
-                <option value="30">Up to 30 min</option>
-                <option value="60">Up to 1 hour</option>
-              </select>
+          <!-- TITLE + SEARCH INLINE -->
+          <div class="title-search-row">
+           
+
+            <div class="search-filter-wrapper">
+              <label class="search-label">Search Recipes:</label>
+              <div class="search-filter-container">
+                <div class="search-box">
+                  <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search recipes by title..."
+                  />
+                  <button id="search-btn" aria-label="Search">🔍</button>
+                </div>
+                <div class="filter-container">
+                  <label class="filter-label">Difficulty:</label>
+                  <select id="difficulty-filter">
+                    <option value="all">All</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                  </select>
+                  <label class="filter-label">Max Total Time:</label>
+                  <select id="time-filter">
+                    <option value="0">No limit</option>
+                    <option value="15">15 min</option>
+                    <option value="30">30 min</option>
+                    <option value="60">60 min</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div id="recipes-grid" class="recipes-grid">
           <!-- Recipe cards will be inserted here by JavaScript -->
+        </div>
+      </section>
+
+      <!-- WISHLIST PAGE -->
+      <section id="wishlist" class="page">
+        <div class="page-header">
+          <h1 class="page-title">My Wishlist</h1>
+        </div>
+        <div id="wishlist-grid" class="recipes-grid">
+          <!-- wishlisted recipes -->
         </div>
       </section>
 
@@ -104,6 +126,17 @@
                 <option value="hard">Hard</option>
               </select>
               <div class="error-message" id="difficulty-error"></div>
+            </div>
+
+            <!-- NEW: Veg / Non-Veg selector -->
+            <div class="form-group">
+              <label for="veg-type">Type *</label>
+              <select id="veg-type" required>
+                <option value="">Select Type</option>
+                <option value="veg">Veg</option>
+                <option value="nonveg">Non‑Veg</option>
+              </select>
+              <div class="error-message" id="veg-type-error"></div>
             </div>
           </div>
 

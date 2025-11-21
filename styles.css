@@ -122,44 +122,131 @@ main {
   }
 }
 
+/* Title + search row */
+.title-search-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* search wrapper */
+.search-filter-wrapper {
+  width: 100%;
+  background: linear-gradient(180deg, #f0fbff, #eef7ff); /* very light blue */
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(3, 169, 244, 0.04);
+  border: 1px solid rgba(3, 169, 244, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 .search-filter-container {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
 }
 
+/* label to the left */
+.search-label {
+  min-width: 120px;
+  color: var(--dark-gray);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding-left: 4px;
+}
+
+/* prominent white search input with inset / subtle shadow */
 .search-box {
+  position: relative;
+  flex: 1;
+  min-width: 320px;
+  max-width: 720px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.02), 0 6px 14px rgba(2, 6, 23, 0.04);
+  padding-right: 52px; /* room for circular button */
+  padding-left: 12px;
+  height: 44px;
   display: flex;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  overflow: hidden;
+  align-items: center;
 }
-
 .search-box input {
   border: none;
-  padding: 0.5rem 1rem;
   outline: none;
-  width: 250px;
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1;
+  height: 100%;
+  padding: 10px 8px;
+  background: transparent;
 }
-
 .search-box button {
-  background: var(--primary-color);
-  color: white;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   border: none;
-  padding: 0.5rem 1rem;
+  background: linear-gradient(180deg, #66c8ff, #0496e8);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  box-shadow: 0 6px 12px rgba(4, 150, 232, 0.15);
+  font-size: 0.95rem;
 }
 
+/* compact filter controls to the right */
 .filter-container {
   display: flex;
-  gap: 0.5rem;
+  gap: 10px;
+  align-items: center;
 }
 
+/* labels for filters */
+.filter-label {
+  color: var(--dark-gray);
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-right: 6px;
+}
+
+/* select appearance: white rounded with subtle border */
 .filter-container select {
-  padding: 0.5rem;
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--border-radius);
-  background: white;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  min-width: 120px;
+  box-shadow: 0 4px 10px rgba(2, 6, 23, 0.03);
+  appearance: none; /* cleaner look */
+}
+
+/* move badge to right corner beside title */
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.badge-wrap {
+  display: flex;
+  align-items: center;
+}
+
+/* increase wishlist icon size */
+.btn-wishlist {
+  font-size: 1.35rem;
+  padding: 0.35rem 0.6rem;
 }
 
 .recipes-grid {
@@ -641,6 +728,83 @@ footer {
   margin-bottom: 1rem;
 }
 
+/* Veg / Non-veg badges — stronger pill styling (green/red) */
+.veg-badge,
+.nonveg-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  line-height: 1;
+}
+
+/* Veg: vivid green background and darker green text */
+.veg-badge {
+  background: linear-gradient(
+    180deg,
+    rgba(76, 175, 80, 0.09),
+    rgba(76, 175, 80, 0.06)
+  );
+  color: #1b5e20;
+  border-color: rgba(46, 125, 50, 0.12);
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+/* Non-veg: warm red background and deep red text */
+.nonveg-badge {
+  background: linear-gradient(
+    180deg,
+    rgba(244, 67, 54, 0.07),
+    rgba(244, 67, 54, 0.04)
+  );
+  color: #b71c1c;
+  border-color: rgba(198, 40, 40, 0.12);
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+/* Badge position tweak inside card-top-row to ensure it's at right corner */
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Wishlist (heart) sizing and active (wishlisted) styling */
+.btn-wishlist {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--secondary-color);
+  transition: transform 160ms ease, color 160ms ease, text-shadow 160ms ease;
+  font-size: 1.5rem; /* increased by request */
+  line-height: 1;
+  padding: 0.2rem 0.45rem;
+}
+
+/* active state when wishlisted (red heart) */
+.btn-wishlist.active {
+  color: #e53935; /* bright red */
+  transform: scale(1.08);
+  text-shadow: 0 2px 8px rgba(229, 57, 53, 0.18);
+}
+
+/* slight hover affordance for non-active */
+.btn-wishlist:not(.active):hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+/* ensure layout still respects spacing */
+.recipe-actions .action-buttons {
+  align-items: center;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .header-content {
@@ -689,5 +853,248 @@ footer {
   .ingredients-list ul li,
   .steps-list ol li {
     padding: 12px 14px 12px 56px;
+  }
+}
+
+/* Mobile responsive tweaks: tablet / small screens */
+@media (max-width: 600px) {
+  /* single column layout for cards */
+  .recipes-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* smaller card image and reduced padding */
+  .recipe-image {
+    height: 140px;
+  }
+  .recipe-content {
+    padding: 1rem;
+    gap: 0.5rem;
+    min-height: auto;
+  }
+
+  /* slightly smaller title */
+  .recipe-title {
+    font-size: 1.1rem;
+  }
+
+  /* stack meta and make items slightly smaller */
+  .recipe-meta {
+    gap: 0.45rem;
+    font-size: 0.92rem;
+  }
+  .recipe-meta .meta-item {
+    gap: 0.3rem;
+  }
+
+  /* stack action buttons vertically for comfortable tapping */
+  .recipe-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+  .recipe-actions .action-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .recipe-actions .action-buttons .btn-primary,
+  .recipe-actions .action-buttons .btn-secondary {
+    flex: 1;
+    padding: 0.55rem;
+    font-size: 0.95rem;
+  }
+  .recipe-actions .action-buttons .btn-primary {
+    margin-right: 8px;
+  }
+  .card-difficulty-pill {
+    margin-left: 0;
+    align-self: flex-end;
+    margin-top: -6px;
+  }
+
+  /* badges scaled down a touch */
+  .veg-badge,
+  .nonveg-badge {
+    padding: 4px 8px;
+    font-size: 0.78rem;
+  }
+
+  /* Search/filter stack: make inputs full width */
+  .title-search-row {
+    gap: 8px;
+  }
+  .search-filter-wrapper {
+    padding: 10px;
+  }
+  .search-filter-container {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .search-box {
+    min-width: auto;
+    width: 100%;
+    height: 44px;
+    padding-right: 52px;
+  }
+  .search-box input {
+    padding: 10px 12px;
+  }
+  .filter-container {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .filter-container select {
+    min-width: 0;
+    flex: 1;
+  }
+
+  /* wishlist heart slightly larger for touch */
+  .btn-wishlist {
+    font-size: 1.6rem;
+    padding: 0.45rem 0.6rem;
+  }
+}
+
+/* Extra-small screens (phones) */
+@media (max-width: 420px) {
+  /* stack title and search vertically */
+  .title-search-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .page-title {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+
+  /* reduce image height further */
+  .recipe-image {
+    height: 120px;
+  }
+
+  /* tighten card spacing even more */
+  .recipe-content {
+    padding: 0.85rem;
+    gap: 0.45rem;
+  }
+  .recipe-description {
+    -webkit-line-clamp: 3;
+  }
+
+  /* make actions buttons full width stacked */
+  .recipe-actions .action-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .recipe-actions .action-buttons .btn-primary,
+  .recipe-actions .action-buttons .btn-secondary {
+    width: 100%;
+    margin-right: 0;
+  }
+  .card-difficulty-pill {
+    align-self: flex-end;
+    margin-top: 4px;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.78rem;
+  }
+
+  /* filters become compact blocks */
+  .filter-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .filter-container select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* ensure modal and other elements remain usable */
+  .modal-content {
+    padding: 1.25rem;
+    width: 95%;
+  }
+}
+
+/* Fixes for search/filter mobile responsiveness */
+@media (max-width: 760px) {
+  /* Allow title + search row to wrap and stack cleanly */
+  .title-search-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  /* Make the outer wrapper stretch and remove horizontal constraints */
+  .search-filter-wrapper {
+    padding: 10px;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  /* Make inner container stack vertically and allow children to shrink */
+  .search-filter-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  /* Ensure the search input can shrink (prevents overflow) and becomes full width */
+  .search-box {
+    min-width: 0 !important; /* allow flex children to shrink */
+    width: 100%;
+    padding-right: 52px; /* keep room for circular button */
+    height: 44px;
+  }
+
+  /* Ensure input uses available width without forcing overflow */
+  .search-box input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Keep the circular search button positioned correctly when stacked */
+  .search-box button {
+    right: 10px;
+  }
+
+  /* Make filter selects full width and stack */
+  .filter-container {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+    width: 100%;
+  }
+  .filter-container select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Hide or collapse the left label on small widths to preserve space */
+  .search-label {
+    display: none;
+  }
+}
+
+/* Extra small tweaks for very small phones */
+@media (max-width: 420px) {
+  .search-box {
+    height: 42px;
+    padding-right: 48px;
+  }
+  .search-box button {
+    width: 34px;
+    height: 34px;
+    right: 8px;
+  }
+  .search-filter-wrapper {
+    padding: 8px;
+    gap: 6px;
+  }
+  .search-filter-container {
+    gap: 6px;
   }
 }

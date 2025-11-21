@@ -74,9 +74,9 @@ export default class RecipeManager {
   }
 
   // Rendering uses ui helpers
-  renderRecipes(filteredRecipes = null) {
+  renderRecipes(filteredRecipes = null, targetGridId = 'recipes-grid') {
     const recipesToRender = filteredRecipes || this.recipes
-    const recipesGrid = document.getElementById('recipes-grid')
+    const recipesGrid = document.getElementById(targetGridId)
     if (!recipesGrid) return
     if (!recipesToRender || recipesToRender.length === 0) {
       recipesGrid.innerHTML = `
@@ -105,6 +105,94 @@ export default class RecipeManager {
         this.editRecipe(id)
       })
     })
+
+    // NEW: wishlist toggle
+    recipesGrid.querySelectorAll('.wishlist-btn').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const card = e.target.closest('.recipe-card')
+        if (!card) return
+        const id = card.dataset.id
+        const idx = this.recipes.findIndex((r) => r.id === id)
+        if (idx === -1) return
+        this.recipes[idx].wishlisted = !this.recipes[idx].wishlisted
+        try {
+          storage.saveRecipes(this.recipes)
+        } catch (err) {
+          console.error(err)
+        }
+        // re-render the grid that was clicked (wishlist or main)
+        const currentPage = document.querySelector('.page.active')?.id
+        if (currentPage === 'wishlist') this.renderWishlist()
+        else this.renderRecipes(null, targetGridId)
+      })
+    })
+  }
+
+  // NEW: Render only wishlisted recipes into wishlist-grid
+  renderWishlist() {
+    const wishlisted = this.recipes.filter((r) => r.wishlisted)
+    this.renderRecipes(wishlisted, 'wishlist-grid')
+  }
+
+  // Rendering uses ui helpers
+  renderRecipes(filteredRecipes = null, targetGridId = 'recipes-grid') {
+    const recipesToRender = filteredRecipes || this.recipes
+    const recipesGrid = document.getElementById(targetGridId)
+    if (!recipesGrid) return
+    if (!recipesToRender || recipesToRender.length === 0) {
+      recipesGrid.innerHTML = `
+        <div class="empty-state">
+          <h3>No recipes found</h3>
+          <p>Try adjusting your search or add a new recipe.</p>
+        </div>`
+      return
+    }
+    recipesGrid.innerHTML = ui.renderRecipesHTML(recipesToRender)
+
+    // attach handlers (same behavior)
+    recipesGrid.querySelectorAll('.view-recipe').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const card = e.target.closest('.recipe-card')
+        if (!card) return
+        const id = card.dataset.id
+        this.showRecipeDetail(id)
+      })
+    })
+    recipesGrid.querySelectorAll('.edit-recipe').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const card = e.target.closest('.recipe-card')
+        if (!card) return
+        const id = card.dataset.id
+        this.editRecipe(id)
+      })
+    })
+
+    // NEW: wishlist toggle
+    recipesGrid.querySelectorAll('.wishlist-btn').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const card = e.target.closest('.recipe-card')
+        if (!card) return
+        const id = card.dataset.id
+        const idx = this.recipes.findIndex((r) => r.id === id)
+        if (idx === -1) return
+        this.recipes[idx].wishlisted = !this.recipes[idx].wishlisted
+        try {
+          storage.saveRecipes(this.recipes)
+        } catch (err) {
+          console.error(err)
+        }
+        // re-render the grid that was clicked (wishlist or main)
+        const currentPage = document.querySelector('.page.active')?.id
+        if (currentPage === 'wishlist') this.renderWishlist()
+        else this.renderRecipes(null, targetGridId)
+      })
+    })
+  }
+
+  // NEW: Render only wishlisted recipes into wishlist-grid
+  renderWishlist() {
+    const wishlisted = this.recipes.filter((r) => r.wishlisted)
+    this.renderRecipes(wishlisted, 'wishlist-grid')
   }
 
   showRecipeDetail(recipeId) {
@@ -149,6 +237,9 @@ export default class RecipeManager {
     }
     const ft = document.getElementById('form-title')
     if (ft) ft.textContent = 'Edit Recipe'
+    // NEW: populate veg-type select
+    const vegEl = document.getElementById('veg-type')
+    if (vegEl) vegEl.value = recipe.isVeg ? 'veg' : 'nonveg'
     this.showPage('add-recipe')
   }
 
@@ -352,6 +443,12 @@ export default class RecipeManager {
         e.preventDefault()
         const page = link.dataset.page
         if (page === 'add-recipe') this.setupRecipeForm()
+        // NEW: wishlist navigation
+        if (page === 'wishlist') {
+          this.showPage('wishlist')
+          this.renderWishlist()
+          return
+        }
         this.showPage(page)
       })
     })
@@ -391,6 +488,8 @@ export default class RecipeManager {
           steps: Array.from(document.querySelectorAll('.step-input'))
             .map((s) => (s ? s.value.trim() : ''))
             .filter(Boolean),
+          // NEW: type -> isVeg boolean
+          isVeg: (document.getElementById('veg-type')?.value || '') === 'veg',
         }
         if (this.currentRecipeId)
           this.updateRecipe(this.currentRecipeId, formData)
